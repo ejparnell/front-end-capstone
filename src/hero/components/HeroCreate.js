@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Redirect } from 'react-router-dom'
-// import HeroForm from './HeroForm'
 
 class HeroCreate extends Component {
   constructor (props) {

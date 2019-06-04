@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Redirect } from 'react-router-dom'
+// import HeroForm from './HeroUpdate'
 
 class HeroUpdate extends Component {
   constructor (props) {
@@ -17,9 +18,11 @@ class HeroUpdate extends Component {
       updatedHeroId: null
     }
   }
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(event.target)
+    console.log('==============')
+    console.log(event.target.form.name)
+    console.log('==============')
     const response = await axios({
       url: apiUrl + `/heros/${this.props.match.params.id}`,
       method: 'POST',
@@ -42,7 +45,7 @@ class HeroUpdate extends Component {
       return <Redirect to={'/heros'} />
     }
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} name={hero._id}>
         <lable>Hero Name</lable>
         <input
           name="name"
