@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.scss'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import AuthenticatedRoute from './auth/components/AuthenticatedRoute'
 import Header from './header/Header'
@@ -8,12 +8,16 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
+import Heros from './hero/components/Heros'
+import HeroCreate from './hero/components/HeroCreate'
+import Hero from './hero/components/Hero'
+import HeroUpdate from './hero/components/HeroUpdate'
 
 import Alert from 'react-bootstrap/Alert'
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       user: null,
@@ -55,10 +59,18 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
+          <AuthenticatedRoute user={user} exact path='/heros' render={() => (
+            <Heros user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/heros/create' render={() => (
+            <HeroCreate user={user} />
+          )} />
+          <Route user={user} exact path='/heros/:id' component={Hero} />
+          <Route user={user} exact path='/heros/update' component={HeroUpdate} />
         </main>
       </React.Fragment>
     )
   }
 }
 
-export default App
+export default withRouter(App)
