@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Redirect } from 'react-router-dom'
-// import HeroForm from './HeroUpdate'
+import HeroForm from './HeroForm'
 
 class HeroUpdate extends Component {
   constructor (props) {
@@ -10,9 +10,10 @@ class HeroUpdate extends Component {
     this.state = {
       hero: {
         name: '',
-        bag: '',
+        kin: '',
         alignment: '',
         specialty: '',
+        age: '',
         owner: ''
       },
       updatedHeroId: null
@@ -20,17 +21,14 @@ class HeroUpdate extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault()
-    console.log('==============')
-    console.log(event.target.form.name)
-    console.log('==============')
-    const response = await axios({
+    await axios({
       url: apiUrl + `/heros/${this.props.match.params.id}`,
-      method: 'POST',
+      method: 'PATCH',
       data: {
         hero: this.state.hero
       }
     })
-    this.setState({ createdHeroId: response.data.hero.id })
+    this.setState({ updatedHeroId: true })
   }
   handleChange = event => {
     const updatedField = {
@@ -40,48 +38,16 @@ class HeroUpdate extends Component {
     this.setState({ hero: editedHero })
   }
   render () {
-    const { createdHeroId, hero } = this.state
-    if (createdHeroId) {
+    const { updatedHeroId, hero } = this.state
+    if (updatedHeroId) {
       return <Redirect to={'/heros'} />
     }
     return (
-      <form onSubmit={this.handleSubmit} name={hero._id}>
-        <lable>Hero Name</lable>
-        <input
-          name="name"
-          placeholder="Hero Name"
-          value={hero.name}
-          onChange={this.handleChange}
-        />
-        <lable>Potion of Healing
-          <input
-            type="radio"
-            name="bag"
-            checked={hero.bag === '5cf520e3915098b0f339e365'}
-            value="5cf520e3915098b0f339e365"
-            onChange={this.handleChange}
-          />
-        </lable>
-        <lable>Fighter
-          <input
-            type="radio"
-            name="specialty"
-            checked={hero.specialty === '5cf3e94d38aed4ae3c413fe5'}
-            value="5cf3e94d38aed4ae3c413fe5"
-            onChange={this.handleChange}
-          />
-        </lable>
-        <lable>Chaotic Good
-          <input
-            type="radio"
-            name="alignment"
-            checked={hero.alignment === 'Chaotic Good'}
-            value="Chaotic Good"
-            onChange={this.handleChange}
-          />
-        </lable>
-        <button name={hero._id} type='submit'>Submit</button>
-      </form>
+      <HeroForm
+        hero={hero}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+      />
     )
   }
 }

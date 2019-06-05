@@ -46,3 +46,42 @@ $charcoal: #ccc;
     max-width: 200px;
   }
 }
+
+.hero-trait-options {
+
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  input {
+    margin: .5em;
+  }
+}
+
+.hero-kin-options {
+
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  input {
+    margin: .5em;
+  }
+}
+
+.hero-specialty-options {
+
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  input {
+    margin: .5em;
+  }
+}

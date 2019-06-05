@@ -27,27 +27,20 @@ class Heros extends Component {
       }
     })
     this.setState({ heros: heroArr })
-    console.log(this.state.heros)
   }
   deleteHero = async (event) => {
-    console.log(event.target.name)
     await axios.delete(`${apiUrl}/heros/${event.target.name}`)
     this.setState({ deleted: true })
   }
   render () {
     let { heros } = this.state
-    if (!heros) {
-      return (
-        <p>Loading...</p>
-      )
-    }
     heros = this.state.heros.map(hero => (
       <div key={hero._id}>
         <h3>{hero.name}</h3>
         <p>{hero.alignment}</p>
         <p>{hero.specialty.name}</p>
         <button name={hero._id} onClick={this.deleteHero}>Remove Hero</button>
-        <Link to='/heros/update'><button name={hero._id}>Update Hero</button></Link>
+        <Link to={`/heros/${hero._id}/update`}><button name={hero._id}>Update Hero</button></Link>
       </div>
     ))
     return (
