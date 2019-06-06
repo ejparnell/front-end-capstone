@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 class Heros extends Component {
@@ -34,6 +34,10 @@ class Heros extends Component {
     this.setState({ deleted: true })
   }
   render () {
+    const { deleted } = this.state
+    if (deleted) {
+      return <Redirect to={'/heros'} />
+    }
     let { heros } = this.state
     heros = this.state.heros.map(hero => (
       <div className='hero-cards' key={hero._id}>
