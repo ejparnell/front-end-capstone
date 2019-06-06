@@ -12,8 +12,8 @@ class Hero extends Component {
     }
   }
   async componentDidMount () {
-    const response = await axios(`${apiUrl}/heros/${this.props.match.params._id}`)
-    console.log(this)
+    const response = await axios(`${apiUrl}/heros/${this.props.match.params.id}`)
+    // console.log(response)
     this.setState({ hero: response.data.hero })
   }
   deleteHero = async () => {
@@ -22,13 +22,22 @@ class Hero extends Component {
   }
   render () {
     const { hero, deleted } = this.state
-    console.log(hero)
+    if (!hero) {
+      return (
+        <p>Loading....</p>
+      )
+    }
     if (deleted) {
       return <Redirect to={'/heros'} />
     }
-    console.log(this.state.hero.specialty)
+    // console.log('==============')
+    // console.log(hero.specialty)
+    // console.log('==============')
     return (
       <div>
+        <h3>{hero.name}</h3>
+        <p>{hero.alignment}</p>
+        <p>{hero.age}</p>
       </div>
     )
   }

@@ -65,9 +65,11 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/heros/create' render={() => (
             <HeroCreate user={user} />
           )} />
-          <Route user={user} exact path='/heros/:id' component={Hero} />
           <AuthenticatedRoute user={user} exact path='/heros/:id/update' render={({ match }) => (
             <HeroUpdate match={match} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/heros/:id' render={({ match }) => (
+            <Hero match={match} user={user} />
           )} />
         </main>
       </React.Fragment>

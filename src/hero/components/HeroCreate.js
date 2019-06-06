@@ -22,7 +22,7 @@ class HeroCreate extends Component {
   handleSubmit = async event => {
     event.preventDefault()
     const { user } = this.props
-    console.log(this.props)
+    // console.log(this.props)
     const response = await axios({
       url: apiUrl + '/heros',
       method: 'POST',
