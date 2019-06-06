@@ -22,8 +22,7 @@ class HeroCreate extends Component {
   handleSubmit = async event => {
     event.preventDefault()
     const { user } = this.props
-    console.log(this.props)
-    await axios({
+    const response = await axios({
       url: apiUrl + '/heros',
       method: 'POST',
       headers: {
@@ -33,7 +32,7 @@ class HeroCreate extends Component {
         hero: this.state.hero
       }
     })
-    this.setState({ createdHeroId: true })
+    this.setState({ createdHeroId: response.data.hero })
   }
   handleChange = event => {
     const updatedField = {
