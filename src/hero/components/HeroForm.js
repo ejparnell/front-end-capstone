@@ -10,6 +10,7 @@ const HeroForm = ({ handleSubmit, handleChange, hero }) => (
     <div className='hero-trait-options'>
       <lable>Hero Name
         <input
+          required
           name="name"
           placeholder="Hero Name"
           value={hero.name}
@@ -18,6 +19,7 @@ const HeroForm = ({ handleSubmit, handleChange, hero }) => (
       </lable><br />
       <lable>Hero Age
         <input
+          required
           name="age"
           placeholder="Hero Age"
           value={hero.age}
