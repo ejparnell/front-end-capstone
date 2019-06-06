@@ -36,7 +36,7 @@ class Heros extends Component {
   render () {
     const { deleted } = this.state
     if (deleted) {
-      return <Redirect to={'/heros'} />
+      return <Redirect to={'/'} />
     }
     let { heros } = this.state
     heros = this.state.heros.map(hero => (
