@@ -13,7 +13,6 @@ class Hero extends Component {
   }
   async componentDidMount () {
     const response = await axios(`${apiUrl}/heros/${this.props.match.params.id}`)
-    console.log(response)
     this.setState({ hero: response.data.hero })
   }
   deleteHero = async () => {
@@ -30,9 +29,6 @@ class Hero extends Component {
     if (deleted) {
       return <Redirect to={'/heros'} />
     }
-    console.log('==============')
-    console.log(hero.specialty)
-    console.log('==============')
     return (
       <div>
         <h3>{hero.name}</h3>
