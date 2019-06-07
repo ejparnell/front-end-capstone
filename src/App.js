@@ -10,7 +10,6 @@ import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import Heros from './hero/components/Heros'
 import HeroCreate from './hero/components/HeroCreate'
-import Hero from './hero/components/Hero'
 import HeroUpdate from './hero/components/HeroUpdate'
 
 import Alert from 'react-bootstrap/Alert'
@@ -68,11 +67,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/heros/:id/update' render={({ match }) => (
             <HeroUpdate match={match} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/heros/:id' render={({ match }) => (
-            <Hero match={match} user={user} />
-          )} />
           <AuthenticatedRoute user={user} exact path='/' render={({ match }) => (
-            <Hero match={match} user={user} />
+            <Heros match={match} user={user} />
           )} />
         </main>
       </React.Fragment>

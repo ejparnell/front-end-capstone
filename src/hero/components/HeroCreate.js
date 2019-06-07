@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import HeroForm from './HeroForm'
 
 class HeroCreate extends Component {
@@ -15,14 +15,13 @@ class HeroCreate extends Component {
         specialty: '',
         age: '',
         owner: this.props.user
-      },
-      createdHeroId: false
+      }
     }
   }
   handleSubmit = async event => {
     event.preventDefault()
     const { user } = this.props
-    const response = await axios({
+    await axios({
       url: apiUrl + '/heros',
       method: 'POST',
       headers: {
@@ -32,7 +31,7 @@ class HeroCreate extends Component {
         hero: this.state.hero
       }
     })
-    this.setState({ createdHeroId: response.data.hero })
+    this.props.history.push('/heros')
   }
   handleChange = event => {
     const updatedField = {
@@ -42,10 +41,7 @@ class HeroCreate extends Component {
     this.setState({ hero: editedHero })
   }
   render () {
-    const { createdHeroId, hero } = this.state
-    if (createdHeroId) {
-      return <Redirect to={'/heros'} />
-    }
+    const { hero } = this.state
     return (
       <HeroForm
         hero={hero}
@@ -56,4 +52,4 @@ class HeroCreate extends Component {
   }
 }
 
-export default HeroCreate
+export default withRouter(HeroCreate)

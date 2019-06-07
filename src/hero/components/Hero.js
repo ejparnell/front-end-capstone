@@ -1,3 +1,4 @@
+/*
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
@@ -40,3 +41,4 @@ class Hero extends Component {
 }
 
 export default Hero
+*/

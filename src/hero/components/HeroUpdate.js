@@ -1,23 +1,30 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import HeroForm from './HeroForm'
 
 class HeroUpdate extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      hero: {
-        name: '',
-        kin: '',
-        alignment: '',
-        specialty: '',
-        age: '',
-        owner: ''
-      },
-      updatedHeroId: null
+      hero: null
     }
+  }
+  reloadState = async () => {
+    const { user } = this.props
+    const response = await axios({
+      url: apiUrl + '/heros',
+      method: 'GET',
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      }
+    })
+    const hero = response.data.heros.find(hero => user._id === hero.owner && hero._id === this.props.match.params.id)
+    this.setState({ hero: hero })
+  }
+  componentDidMount () {
+    this.reloadState()
   }
   handleSubmit = async (event) => {
     event.preventDefault()
@@ -28,7 +35,7 @@ class HeroUpdate extends Component {
         hero: this.state.hero
       }
     })
-    this.setState({ updatedHeroId: true })
+    this.props.history.push('/heros')
   }
   handleChange = event => {
     const updatedField = {
@@ -38,18 +45,15 @@ class HeroUpdate extends Component {
     this.setState({ hero: editedHero })
   }
   render () {
-    const { updatedHeroId, hero } = this.state
-    if (updatedHeroId) {
-      return <Redirect to={'/heros'} />
-    }
-    return (
+    const { hero } = this.state
+    return hero ? (
       <HeroForm
         hero={hero}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
       />
-    )
+    ) : <h1>Loading...⏳</h1>
   }
 }
 
-export default HeroUpdate
+export default withRouter(HeroUpdate)

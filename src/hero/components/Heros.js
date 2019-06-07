@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 class Heros extends Component {
@@ -12,7 +12,7 @@ class Heros extends Component {
       deleted: false
     }
   }
-  async componentDidMount () {
+  reloadState = async () => {
     const { user } = this.props
     const response = await axios({
       url: apiUrl + '/heros',
@@ -29,18 +29,19 @@ class Heros extends Component {
     })
     this.setState({ heros: heroArr })
   }
+  componentDidMount () {
+    return this.reloadState()
+  }
   deleteHero = async (event) => {
     await axios.delete(`${apiUrl}/heros/${event.target.name}`)
-    this.setState({ deleted: true })
+    this.reloadState()
   }
   render () {
-    const { deleted } = this.state
-    if (deleted) {
-      return <Redirect to={'/'} />
-    }
     let { heros } = this.state
-    heros = this.state.heros.map(hero => (
-      <div className='hero-cards' key={hero._id}>
+    heros = this.state.heros.map(hero => {
+      hero.specialty = hero.specialty || {}
+      hero.kin = hero.kin || {}
+      return (<div className='hero-cards' key={hero._id}>
         <h3>{hero.name}</h3>
         <p>Alignment: {hero.alignment}</p>
         <p>Age: {hero.age}</p>
@@ -59,8 +60,8 @@ class Heros extends Component {
         </ul>
         <Button variant="danger" name={hero._id} onClick={this.deleteHero}>Remove Hero</Button>
         <Link to={`/heros/${hero._id}/update`}><Button variant="warning">Update Hero</Button></Link>
-      </div>
-    ))
+      </div>)
+    })
     return (
       <div>
         <div className='hero-container'>
