@@ -27,10 +27,14 @@ class HeroUpdate extends Component {
     this.reloadState()
   }
   handleSubmit = async (event) => {
+    const { user } = this.props
     event.preventDefault()
     await axios({
       url: apiUrl + `/heros/${this.props.match.params.id}`,
       method: 'PATCH',
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      },
       data: {
         hero: this.state.hero
       }

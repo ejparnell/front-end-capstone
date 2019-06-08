@@ -33,7 +33,14 @@ class Heros extends Component {
     return this.reloadState()
   }
   deleteHero = async (event) => {
-    await axios.delete(`${apiUrl}/heros/${event.target.name}`)
+    const { user } = this.props
+    await axios({
+      url: apiUrl + `/heros/${event.target.name}`,
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token token=${user.token}`
+      }
+    })
     this.reloadState()
   }
   render () {
