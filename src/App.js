@@ -11,6 +11,7 @@ import ChangePassword from './auth/components/ChangePassword'
 import Heros from './hero/components/Heros'
 import HeroCreate from './hero/components/HeroCreate'
 import HeroUpdate from './hero/components/HeroUpdate'
+import Hero from './hero/components/Hero'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -58,8 +59,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/heros' render={() => (
-            <Heros user={user} />
+          <AuthenticatedRoute user={user} exact path='/heros/:id/detail' render={({ match }) => (
+            <Hero user={user} match={match}/>
           )} />
           <AuthenticatedRoute user={user} exact path='/heros/create' render={() => (
             <HeroCreate user={user} />

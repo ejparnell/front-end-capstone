@@ -3,6 +3,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { withRouter } from 'react-router-dom'
 import HeroForm from './HeroForm'
+// import Button from 'react-bootstrap/Button'
 
 class HeroCreate extends Component {
   constructor (props) {
@@ -31,7 +32,7 @@ class HeroCreate extends Component {
         hero: this.state.hero
       }
     })
-    this.props.history.push('/heros')
+    this.props.history.push('/')
   }
   handleChange = event => {
     const updatedField = {
@@ -40,14 +41,30 @@ class HeroCreate extends Component {
     const editedHero = Object.assign(this.state.hero, updatedField)
     this.setState({ hero: editedHero })
   }
+  diceRoll = () => {
+    const abilityRoll = []
+    for (let i = 0; i <= 5; i++) {
+      let roll4 = []
+      for (let i = 0; i <= 3; i++) {
+        roll4.push(Math.floor(Math.random() * 6) + 1)
+      }
+      roll4 = roll4.sort((a, b) => a - b)
+      roll4.shift()
+      roll4 = roll4.reduce((a, b) => a + b)
+      abilityRoll.push(roll4)
+    }
+    return abilityRoll
+  }
   render () {
     const { hero } = this.state
     return (
-      <HeroForm
-        hero={hero}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-      />
+      <div>
+        <HeroForm
+          hero={hero}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+      </div>
     )
   }
 }

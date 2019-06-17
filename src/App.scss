@@ -89,6 +89,7 @@ $charcoal: #ccc;
 .hero-container {
   display: flex;
   margin-top: 2em;
+  flex-wrap: wrap;
 
   li {
     list-style: none;
@@ -113,4 +114,12 @@ $charcoal: #ccc;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.hero-cards {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 20em;
+  justify-content: space-between;
 }

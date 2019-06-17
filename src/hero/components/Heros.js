@@ -32,17 +32,6 @@ class Heros extends Component {
   componentDidMount () {
     return this.reloadState()
   }
-  deleteHero = async (event) => {
-    const { user } = this.props
-    await axios({
-      url: apiUrl + `/heros/${event.target.name}`,
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${user.token}`
-      }
-    })
-    this.reloadState()
-  }
   render () {
     let { heros } = this.state
     heros = this.state.heros.map(hero => {
@@ -53,20 +42,8 @@ class Heros extends Component {
         <p>Alignment: {hero.alignment}</p>
         <p>Age: {hero.age}</p>
         <h5>{hero.specialty.name}</h5>
-        <ul>
-          <li>Health: {hero.specialty.health}</li>
-          <li>Damage: {hero.specialty.hitDice}</li>
-          <li>Weapon: {hero.specialty.weapon}</li>
-          <li>Armor: {hero.specialty.armor}</li>
-        </ul>
         <h5>{hero.kin.name}</h5>
-        <ul>
-          <li>Size: {hero.kin.size}</li>
-          <li>Ability: {hero.kin.ability}</li>
-          <li>Walking Speed: {hero.kin.speed}</li>
-        </ul>
-        <Button variant="danger" name={hero._id} onClick={this.deleteHero}>Remove Hero</Button>
-        <Link to={`/heros/${hero._id}/update`}><Button variant="warning">Update Hero</Button></Link>
+        <Link to={`/heros/${hero._id}/detail`}><Button variant="primary">Visit Hero</Button></Link>
       </div>)
     })
     return (
@@ -75,7 +52,7 @@ class Heros extends Component {
           {heros}
         </div>
         <div className='create-hero-button'>
-          <Link to='./heros/create'><Button variant="primary">Create New Player</Button></Link>
+          <Link to='/heros/create'><Button variant="primary">Create New Player</Button></Link>
         </div>
       </div>
     )

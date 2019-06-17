@@ -39,7 +39,7 @@ class HeroUpdate extends Component {
         hero: this.state.hero
       }
     })
-    this.props.history.push('/heros')
+    this.props.history.push('/')
   }
   handleChange = event => {
     const updatedField = {
