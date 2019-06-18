@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
+import Button from 'react-bootstrap/Button'
 import { signIn } from '../api'
 import messages from '../messages'
 
@@ -58,7 +58,7 @@ class SignIn extends Component {
           placeholder="Password"
           onChange={this.handleChange}
         />
-        <button type="submit">Sign In</button>
+        <Button variant="primary" type="submit">Sign In</Button>
       </form>
     )
   }

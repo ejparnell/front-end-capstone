@@ -2,8 +2,8 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 
 const HeroForm = ({ handleSubmit, handleChange, hero }) => (
-  <form onSubmit={handleSubmit}>
-    <h4>Create Your Hero</h4>
+  <form onSubmit={handleSubmit} className="hero-form">
+    <h2>Create Your Hero</h2>
     <div className='hero-trait-options'>
       <label>Hero Name
         <input

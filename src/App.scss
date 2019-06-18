@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand|VT323&display=swap');
 $success: #c7f282;
 $warning: #f1e681;
 $error: #f08181;
 $charcoal: #ccc;
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #F5FEFF;
+}
 
 .flash-success,
 .flash-warning,
@@ -90,6 +96,7 @@ $charcoal: #ccc;
   display: flex;
   margin-top: 2em;
   flex-wrap: wrap;
+  justify-content: center;
 
   li {
     list-style: none;
@@ -120,6 +127,50 @@ $charcoal: #ccc;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 20em;
+  width: 20rem;
   justify-content: space-between;
+  margin: 1rem;
+  box-shadow: 4px 3px 42px -6px rgba(0,0,0,0.34);
+  text-align: center;
+  padding: .5rem;
+  border-radius: 3.5%;
+  background-color: white;
+
+  strong {
+    font-weight: 900;
+    color: #ABABAB;
+  }
+}
+
+.header-name {
+  font-family: 'VT323', monospace;
+}
+
+.hero-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-card {
+  box-shadow: 4px 3px 42px -6px rgba(0,0,0,0.34);
+  border-radius: 3.5%;
+  background-color: white;
+  width: 35rem;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 2rem;
+}
+
+.hero-card-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hero-form {
+  margin: 2rem;
+
+  h2, h3 {
+    text-align: center;
+  }
 }

@@ -39,11 +39,11 @@ class Heros extends Component {
       hero.kin = hero.kin || {}
       return (<div className='hero-cards' key={hero._id}>
         <h3>{hero.name}</h3>
-        <p>Alignment: {hero.alignment}</p>
-        <p>Age: {hero.age}</p>
-        <h5>{hero.specialty.name}</h5>
-        <h5>{hero.kin.name}</h5>
-        <Link to={`/heros/${hero._id}/detail`}><Button variant="primary">Visit Hero</Button></Link>
+        <p><strong>Alignment:</strong> {hero.alignment}</p>
+        <p><strong>Age:</strong> {hero.age}</p>
+        <p><strong>Class:</strong> {hero.specialty.name}</p>
+        <p><strong>Race:</strong> {hero.kin.name}</p>
+        <Link to={`/heros/${hero._id}/detail`}><Button className="hero-button" variant="primary">Visit Hero</Button></Link>
       </div>)
     })
     return (

@@ -40,25 +40,29 @@ class Hero extends Component {
       return <Redirect to={'/'} />
     }
     return (
-      <div>
-        <h3>{hero.name}</h3>
-        <p>{hero.alignment}</p>
-        <p>{hero.age}</p>
-        <h5>{specialty.name}</h5>
-        <ul>
-          <li>Health: {specialty.health}</li>
-          <li>Damage: {specialty.hitDice}</li>
-          <li>Weapon: {specialty.weapon}</li>
-          <li>Armor: {specialty.armor}</li>
-        </ul>
-        <h5>{kin.name}</h5>
-        <ul>
-          <li>Size: {kin.size}</li>
-          <li>Ability: {kin.ability}</li>
-          <li>Walking Speed: {kin.speed}</li>
-        </ul>
-        <Button variant="danger" name={hero._id} onClick={this.deleteHero}>Remove Hero</Button>
-        <Link to={`/heros/${hero._id}/update`}><Button variant="warning">Update Hero</Button></Link>
+      <div className="hero-card">
+        <div className="hero-info">
+          <h3>{hero.name}</h3>
+          <p>{hero.alignment}</p>
+          <p>{hero.age}</p>
+          <h5>{specialty.name}</h5>
+          <ul>
+            <li>Health: {specialty.health}</li>
+            <li>Damage: {specialty.hitDice}</li>
+            <li>Weapon: {specialty.weapon}</li>
+            <li>Armor: {specialty.armor}</li>
+          </ul>
+          <h5>{kin.name}</h5>
+          <ul>
+            <li>Size: {kin.size}</li>
+            <li>Ability: {kin.ability}</li>
+            <li>Walking Speed: {kin.speed}</li>
+          </ul>
+        </div>
+        <div className="hero-card-buttons">
+          <Link to={`/heros/${hero._id}/update`}><Button variant="warning" size="lg">Update Hero</Button></Link>
+          <Button variant="danger" size="lg" name={hero._id} onClick={this.deleteHero}>Remove Hero</Button>
+        </div>
       </div>
     )
   }
